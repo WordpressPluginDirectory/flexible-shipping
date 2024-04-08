@@ -3,8 +3,8 @@ Contributors: octolize,grola,sebastianpisula
 Donate link: https://octol.io/fs-repo-up
 Tags: table rate, table rate shipping, conditional shipping, free shipping, woocommerce shipping, woocommerce table rate shipping, cart based shipping, weight based shipping, totals based shipping, order based shipping, advanced shipping
 Requires at least: 5.8
-Tested up to: 6.4
-Stable tag: 4.24.16
+Tested up to: 6.5
+Stable tag: 4.24.19
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -233,6 +233,18 @@ We provide a limited support for the free version of our Flexible Shipping plugi
 If you are upgrading from the old Flexible Shipping version (1.3.2, woo-flexible-shipping) make sure to completely delete the old version first. If you install the new version without deleting the old one it may break your WordPress installation.
 
 == Changelog ==
+
+= 4.24.19 - 2024-04-08 =
+* Added support for WooCommerce 8.8
+* Fixed duplicate shipping method link on zone shipping methods list
+
+= 4.24.18 - 2024-03-28 =
+* Added support for WordPress 6.5
+
+= 4.24.17 - 2024-03-13 =
+* Updated libraries
+* Added AJAX permissions check in onboarding form
+* Logger moved to WooCommerce logs
 
 = 4.24.16 - 2024-03-10 =
 * Fixed AJAX nonce check in op-in form
