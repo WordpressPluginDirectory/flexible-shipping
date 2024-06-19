@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4cb4ab35887914b4f2b7ad3ccf2d8cb7
+class ComposerStaticInitbafe01075cdfa6d6b3dc011e035c4bbe
 {
     public static $prefixLengthsPsr4 = array (
         'W' => 
@@ -150,6 +150,12 @@ class ComposerStaticInit4cb4ab35887914b4f2b7ad3ccf2d8cb7
         'FSVendor\\Octolize\\Blocks\\IntegrationData' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-checkout-block-integration/src/Blocks/IntegrationData.php',
         'FSVendor\\Octolize\\Blocks\\Registrator' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-checkout-block-integration/src/Blocks/Registrator.php',
         'FSVendor\\Octolize\\Blocks\\StoreEndpoint' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/octolize-checkout-block-integration/src/Blocks/StoreEndpoint.php',
+        'FSVendor\\Octolize\\Brand\\Assets\\AdminAssets' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/Assets/AdminAssets.php',
+        'FSVendor\\Octolize\\Brand\\UpsellingBox\\ConstantShouldShowStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpsellingBox/ConstantShouldShowStrategy.php',
+        'FSVendor\\Octolize\\Brand\\UpsellingBox\\SettingsSidebar' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpsellingBox/SettingsSidebar.php',
+        'FSVendor\\Octolize\\Brand\\UpsellingBox\\ShippingMethodAndConstantDisplayStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpsellingBox/ShippingMethodAndConstantDisplayStrategy.php',
+        'FSVendor\\Octolize\\Brand\\UpsellingBox\\ShippingMethodInstanceShouldShowStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpsellingBox/ShippingMethodInstanceShouldShowStrategy.php',
+        'FSVendor\\Octolize\\Brand\\UpsellingBox\\ShippingMethodShouldShowStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-brand-assets/src/Brand/UpsellingBox/ShippingMethodShouldShowStrategy.php',
         'FSVendor\\Octolize\\ShippingExtensions\\AdminPage' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/AdminPage.php',
         'FSVendor\\Octolize\\ShippingExtensions\\Assets' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/Assets.php',
         'FSVendor\\Octolize\\ShippingExtensions\\Page' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/Page.php',
@@ -162,6 +168,7 @@ class ComposerStaticInit4cb4ab35887914b4f2b7ad3ccf2d8cb7
         'FSVendor\\Octolize\\ShippingExtensions\\Tracker\\DataProvider\\ShippingExtensionsDataProvider' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/Tracker/DataProvider/ShippingExtensionsDataProvider.php',
         'FSVendor\\Octolize\\ShippingExtensions\\Tracker\\Tracker' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/Tracker/Tracker.php',
         'FSVendor\\Octolize\\ShippingExtensions\\Tracker\\ViewPageTracker' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/Tracker/ViewPageTracker.php',
+        'FSVendor\\Octolize\\ShippingExtensions\\WooCommerceSuggestions' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-shipping-extensions/src/ShippingExtensions/WooCommerceSuggestions.php',
         'FSVendor\\Octolize\\Tracker\\DeactivationTracker\\OctolizeProReasonsFactory' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-tracker/src/DeactivationTracker/OctolizeProReasonsFactory.php',
         'FSVendor\\Octolize\\Tracker\\DeactivationTracker\\OctolizeReasonsFactory' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-tracker/src/DeactivationTracker/OctolizeReasonsFactory.php',
         'FSVendor\\Octolize\\Tracker\\OptInNotice\\OptInNotice' => __DIR__ . '/../..' . '/vendor_prefixed/octolize/wp-octolize-tracker/src/OptInNotice/OptInNotice.php',
@@ -363,6 +370,15 @@ class ComposerStaticInit4cb4ab35887914b4f2b7ad3ccf2d8cb7
         'FSVendor\\WPDesk\\Session\\Adapter\\WooCommerceSession' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wpdesk-sessions/src/WPDesk/Sessions/Adapter/WooCommerceSession.php',
         'FSVendor\\WPDesk\\Session\\Session' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wpdesk-sessions/src/WPDesk/Sessions/Session.php',
         'FSVendor\\WPDesk\\Session\\SessionFactory' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wpdesk-sessions/src/WPDesk/Sessions/SessionFactory.php',
+        'FSVendor\\WPDesk\\ShowDecision\\AndStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-show-decision/src/AndStrategy.php',
+        'FSVendor\\WPDesk\\ShowDecision\\ConstantDefinedStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-show-decision/src/ConstantDefinedStrategy.php',
+        'FSVendor\\WPDesk\\ShowDecision\\ConstantNotDefinedStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-show-decision/src/ConstantNotDefinedStrategy.php',
+        'FSVendor\\WPDesk\\ShowDecision\\GetStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-show-decision/src/GetStrategy.php',
+        'FSVendor\\WPDesk\\ShowDecision\\OrStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-show-decision/src/OrStrategy.php',
+        'FSVendor\\WPDesk\\ShowDecision\\PostTypeStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-show-decision/src/PostTypeStrategy.php',
+        'FSVendor\\WPDesk\\ShowDecision\\ShouldShowStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-show-decision/src/ShouldShowStrategy.php',
+        'FSVendor\\WPDesk\\ShowDecision\\WooCommerce\\ShippingMethodInstanceStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-show-decision/src/WooCommerce/ShippingMethodInstanceStrategy.php',
+        'FSVendor\\WPDesk\\ShowDecision\\WooCommerce\\ShippingMethodStrategy' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-show-decision/src/WooCommerce/ShippingMethodStrategy.php',
         'FSVendor\\WPDesk\\Tracker\\Assets' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker/src/PSR/WPDesk/Tracker/Assets.php',
         'FSVendor\\WPDesk\\Tracker\\Deactivation\\AjaxDeactivationDataHandler' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker-deactivation/src/WPDesk/Tracker/Deactivation/AjaxDeactivationDataHandler.php',
         'FSVendor\\WPDesk\\Tracker\\Deactivation\\DeactivationContent' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-wpdesk-tracker-deactivation/src/WPDesk/Tracker/Deactivation/DeactivationContent.php',
@@ -398,13 +414,13 @@ class ComposerStaticInit4cb4ab35887914b4f2b7ad3ccf2d8cb7
         'FSVendor\\WPDesk\\View\\Resolver\\NullResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-view/src/Resolver/NullResolver.php',
         'FSVendor\\WPDesk\\View\\Resolver\\Resolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-view/src/Resolver/Resolver.php',
         'FSVendor\\WPDesk\\View\\Resolver\\WPThemeResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-view/src/Resolver/WPThemeResolver.php',
+        'FSVendor\\WPDesk\\View\\Resolver\\WooTemplateResolver' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-view/src/Resolver/WooTemplateResolver.php',
         'FSVendor\\WPDesk\\WooCommerce\\CurrencySwitchers\\AbstractConverter' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wc-currency-switchers-integrations/src/AbstractConverter.php',
         'FSVendor\\WPDesk\\WooCommerce\\CurrencySwitchers\\FilterConverter' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wc-currency-switchers-integrations/src/FilterConverter.php',
         'FSVendor\\WPDesk\\WooCommerce\\CurrencySwitchers\\FilterConvertersFactory' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wc-currency-switchers-integrations/src/FilterConvertersFactory.php',
         'FSVendor\\WPDesk\\WooCommerce\\CurrencySwitchers\\ShippingIntegrations' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wc-currency-switchers-integrations/src/ShippingIntegrations.php',
         'FSVendor\\WPDesk\\WooCommerce\\CurrencySwitchers\\SwitcherConverter' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wc-currency-switchers-integrations/src/SwitcherConverter.php',
         'FSVendor\\WPDesk\\WooCommerce\\CurrencySwitchers\\Switcher\\Aelia\\Converter' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wc-currency-switchers-integrations/src/Switcher/Aelia/Converter.php',
-        'FSVendor\\WPDesk\\WooCommerce\\CurrencySwitchers\\Switcher\\CURCY\\Converter' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wc-currency-switchers-integrations/src/Switcher/CURCY/Converter.php',
         'FSVendor\\WPDesk\\WooCommerce\\CurrencySwitchers\\Switcher\\CurrencySwitcherWoocommerce\\Converter' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wc-currency-switchers-integrations/src/Switcher/CurrencySwitcherWoocommerce/Converter.php',
         'FSVendor\\WPDesk\\WooCommerce\\CurrencySwitchers\\Switcher\\FoxCurrencySwitcher\\Converter' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wc-currency-switchers-integrations/src/Switcher/FoxCurrencySwitcher/Converter.php',
         'FSVendor\\WPDesk\\WooCommerce\\CurrencySwitchers\\Switcher\\WCML\\Converter' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wc-currency-switchers-integrations/src/Switcher/WCML/Converter.php',
@@ -467,6 +483,8 @@ class ComposerStaticInit4cb4ab35887914b4f2b7ad3ccf2d8cb7
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
+        'WPDesk\\FS\\AdvertMetabox\\FsiePluginAdvertMetabox' => __DIR__ . '/../..' . '/src/WPDesk/FS/AdvertMetabox/FsiePluginAdvertMetabox.php',
+        'WPDesk\\FS\\AdvertMetabox\\ProPluginAdvertMetabox' => __DIR__ . '/../..' . '/src/WPDesk/FS/AdvertMetabox/ProPluginAdvertMetabox.php',
         'WPDesk\\FS\\Blocks\\FreeShipping\\FreeShippingBlock' => __DIR__ . '/../..' . '/src/WPDesk/FS/Blocks/FreeShipping/FreeShippingBlock.php',
         'WPDesk\\FS\\Blocks\\FreeShipping\\FreeShippingStoreEndpointData' => __DIR__ . '/../..' . '/src/WPDesk/FS/Blocks/FreeShipping/FreeShippingStoreEndpointData.php',
         'WPDesk\\FS\\Helpers\\FlexibleShippingMethodsChecker' => __DIR__ . '/../..' . '/src/WPDesk/FS/Helpers/FlexibleShippingMethodsChecker.php',
@@ -488,6 +506,7 @@ class ComposerStaticInit4cb4ab35887914b4f2b7ad3ccf2d8cb7
         'WPDesk\\FS\\Onboarding\\TableRate\\PopupData' => __DIR__ . '/../..' . '/src/WPDesk/FS/Onboarding/TableRate/PopupData.php',
         'WPDesk\\FS\\Onboarding\\TableRate\\Tracker' => __DIR__ . '/../..' . '/src/WPDesk/FS/Onboarding/TableRate/Tracker.php',
         'WPDesk\\FS\\Plugin\\PluginActivation' => __DIR__ . '/../..' . '/src/WPDesk/FS/Plugin/PluginActivation.php',
+        'WPDesk\\FS\\Plugin\\PluginLinks' => __DIR__ . '/../..' . '/src/WPDesk/FS/Plugin/PluginLinks.php',
         'WPDesk\\FS\\ProFeatures\\Tracker\\AjaxTracker' => __DIR__ . '/../..' . '/src/WPDesk/FS/ProFeatures/Tracker/AjaxTracker.php',
         'WPDesk\\FS\\ProFeatures\\Tracker\\Tracker' => __DIR__ . '/../..' . '/src/WPDesk/FS/ProFeatures/Tracker/Tracker.php',
         'WPDesk\\FS\\ProFeatures\\Tracker\\TrackingData' => __DIR__ . '/../..' . '/src/WPDesk/FS/ProFeatures/Tracker/TrackingData.php',
@@ -645,9 +664,9 @@ class ComposerStaticInit4cb4ab35887914b4f2b7ad3ccf2d8cb7
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4cb4ab35887914b4f2b7ad3ccf2d8cb7::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4cb4ab35887914b4f2b7ad3ccf2d8cb7::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit4cb4ab35887914b4f2b7ad3ccf2d8cb7::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitbafe01075cdfa6d6b3dc011e035c4bbe::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitbafe01075cdfa6d6b3dc011e035c4bbe::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitbafe01075cdfa6d6b3dc011e035c4bbe::$classMap;
 
         }, null, ClassLoader::class);
     }
