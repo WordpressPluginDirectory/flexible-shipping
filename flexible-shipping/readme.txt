@@ -1,15 +1,15 @@
 === Table Rate Shipping Method for WooCommerce by Flexible Shipping ===
 Contributors: octolize,grola,sebastianpisula
 Donate link: https://octol.io/fs-repo-up
-Tags: table rate, table rate shipping, conditional shipping, free shipping, woocommerce shipping, woocommerce table rate shipping, cart based shipping, weight based shipping, totals based shipping, order based shipping, advanced shipping
+Tags: woocommerce shipping, table rate shipping, woocommerce table rate shipping, advanced shipping, flexible shipping woocommerce
 Requires at least: 5.8
 Tested up to: 6.6
-Stable tag: 4.25.4
+Stable tag: 4.25.5
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-The best and the most powerful Table Rate shipping plugin for WooCommerce. Define the shipping rules based on numerous conditions and configure even the most complex shipping scenarios based on totals, weight, quantity and more.
+Table Rate shipping plugin for WooCommerce. Easily define shipping calculation rules based on weight or cart total. Improve conversion - try it now!
 
 == Description ==
 
@@ -233,6 +233,9 @@ We provide a limited support for the free version of our Flexible Shipping plugi
 If you are upgrading from the old Flexible Shipping version (1.3.2, woo-flexible-shipping) make sure to completely delete the old version first. If you install the new version without deleting the old one it may break your WordPress installation.
 
 == Changelog ==
+
+= 4.25.5 - 2024-08-04 =
+* Added support for WooCommerce 9.2
 
 = 4.25.4 - 2024-07-18 =
 * Added support for WordPress 6.6
