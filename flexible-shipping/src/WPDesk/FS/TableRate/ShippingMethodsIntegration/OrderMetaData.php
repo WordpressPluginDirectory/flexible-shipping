@@ -49,6 +49,9 @@ class OrderMetaData implements Hookable {
 	 * @return string
 	 */
 	public function get_meta_key_display_value( $display_value, $meta, $item ): string {
+		if ( ! $meta instanceof \WC_Meta_Data ) {
+			return $display_value;
+		}
 		$data = $meta->get_data();
 		if ( self::META_KEY === ( $data['key'] ?? '' ) ) {
 			$meta_value = json_decode( $display_value, true );
@@ -64,13 +67,12 @@ class OrderMetaData implements Hookable {
 		return $display_value;
 	}
 
-	public static function prepare_meta_value( float $original_cost, float $additional_cost ): string {
+	public static function prepare_meta_value( float $base_cost, float $additional_cost ): string {
 		return json_encode(
 			[
-				self::BASE       => wc_price( $original_cost ),
+				self::BASE       => wc_price( $base_cost ),
 				self::ADDITIONAL => wc_price( $additional_cost ),
 			]
 		);
 	}
-
 }
