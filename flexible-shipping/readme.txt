@@ -3,8 +3,8 @@ Contributors: octolize,grola,sebastianpisula
 Donate link: https://octol.io/fs-repo-up
 Tags: woocommerce shipping, table rate shipping, woocommerce table rate shipping, advanced shipping, flexible shipping woocommerce
 Requires at least: 5.8
-Tested up to: 6.8
-Stable tag: 6.4.0
+Tested up to: 6.9
+Stable tag: 6.4.5
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -237,6 +237,23 @@ We provide a limited support for the free version of our Flexible Shipping plugi
 If you are upgrading from the old Flexible Shipping version (1.3.2, woo-flexible-shipping) make sure to completely delete the old version first. If you install the new version without deleting the old one it may break your WordPress installation.
 
 == Changelog ==
+
+= 6.4.5 - 2025-12-02 =
+* Added support for WordPress 6.9
+
+= 6.4.4 - 2025-11-25 =
+* Added support for WooCommerce 10.4
+
+= 6.4.3 - 2025-11-18 =
+* Fixed shipment creation process for shipping integrations
+
+= 6.4.2 - 2025-11-17 =
+* Fixed rating petition
+* Fixed newsletter subscription form
+
+= 6.4.1 - 2025-10-30 =
+* Added support for WooCommerce 10.3
+* Updated Shipping Extensions tab
 
 = 6.4.0 - 2025-09-08 =
 * Added newsletter subscription in the Flexible Shipping Info tab
