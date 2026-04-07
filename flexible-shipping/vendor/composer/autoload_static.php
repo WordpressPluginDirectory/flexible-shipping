@@ -4,17 +4,17 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit296dc75fbeb3d3e3a86fb59c75a0fbce
+class ComposerStaticInitae3f9822c8831036beb147d3aa86c7c0
 {
     public static $prefixLengthsPsr4 = array (
-        'W' => 
+        'W' =>
         array (
             'WPDesk\\FS\\' => 10,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'WPDesk\\FS\\' => 
+        'WPDesk\\FS\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src/WPDesk/FS',
         ),
@@ -507,6 +507,7 @@ class ComposerStaticInit296dc75fbeb3d3e3a86fb59c75a0fbce
         'FSVendor\\WPDesk_Translatable' => __DIR__ . '/../..' . '/vendor_prefixed/wpdesk/wp-builder/src/Plugin/WithoutNamespace/Translatable.php',
         'Flexible_Shipping_Contextual_Info' => __DIR__ . '/../..' . '/classes/Flexible_Shipping_Contextual_Info.php',
         'Flexible_Shipping_Plugin' => __DIR__ . '/../..' . '/classes/class-flexible-shipping-plugin.php',
+        'WPDesk\\FS\\Admin\\MarketplaceSuggestionsRedirect' => __DIR__ . '/../..' . '/src/WPDesk/FS/Admin/MarketplaceSuggestionsRedirect.php',
         'WPDesk\\FS\\AdvertMetabox\\FsiePluginAdvertMetabox' => __DIR__ . '/../..' . '/src/WPDesk/FS/AdvertMetabox/FsiePluginAdvertMetabox.php',
         'WPDesk\\FS\\AdvertMetabox\\ProPluginAdvertMetabox' => __DIR__ . '/../..' . '/src/WPDesk/FS/AdvertMetabox/ProPluginAdvertMetabox.php',
         'WPDesk\\FS\\Blocks\\FreeShipping\\FreeShippingBlock' => __DIR__ . '/../..' . '/src/WPDesk/FS/Blocks/FreeShipping/FreeShippingBlock.php',
@@ -666,6 +667,9 @@ class ComposerStaticInit296dc75fbeb3d3e3a86fb59c75a0fbce
         'WPDesk\\FS\\TableRate\\ShippingMethod\\FreeShippingCalculator' => __DIR__ . '/../..' . '/src/WPDesk/FS/TableRate/ShippingMethod/FreeShippingCalculator.php',
         'WPDesk\\FS\\TableRate\\ShippingMethod\\Management\\ShippingMethodManagement' => __DIR__ . '/../..' . '/src/WPDesk/FS/TableRate/ShippingMethod/Management/ShippingMethodManagement.php',
         'WPDesk\\FS\\TableRate\\ShippingMethod\\MethodDescription' => __DIR__ . '/../..' . '/src/WPDesk/FS/TableRate/ShippingMethod/MethodDescription.php',
+        'WPDesk\\FS\\TableRate\\ShippingMethod\\MethodLogo' => __DIR__ . '/../..' . '/src/WPDesk/FS/TableRate/ShippingMethod/MethodLogo.php',
+        'WPDesk\\FS\\TableRate\\ShippingMethod\\MethodLogoCheckoutBlocksAssets' => __DIR__ . '/../..' . '/src/WPDesk/FS/TableRate/ShippingMethod/MethodLogoCheckoutBlocksAssets.php',
+        'WPDesk\\FS\\TableRate\\ShippingMethod\\MethodLogoSettingsField' => __DIR__ . '/../..' . '/src/WPDesk/FS/TableRate/ShippingMethod/MethodLogoSettingsField.php',
         'WPDesk\\FS\\TableRate\\ShippingMethod\\MethodSettings' => __DIR__ . '/../..' . '/src/WPDesk/FS/TableRate/ShippingMethod/MethodSettings.php',
         'WPDesk\\FS\\TableRate\\ShippingMethod\\MethodTitle' => __DIR__ . '/../..' . '/src/WPDesk/FS/TableRate/ShippingMethod/MethodTitle.php',
         'WPDesk\\FS\\TableRate\\ShippingMethod\\RateCalculator' => __DIR__ . '/../..' . '/src/WPDesk/FS/TableRate/ShippingMethod/RateCalculator.php',
@@ -705,9 +709,9 @@ class ComposerStaticInit296dc75fbeb3d3e3a86fb59c75a0fbce
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit296dc75fbeb3d3e3a86fb59c75a0fbce::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit296dc75fbeb3d3e3a86fb59c75a0fbce::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit296dc75fbeb3d3e3a86fb59c75a0fbce::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitae3f9822c8831036beb147d3aa86c7c0::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitae3f9822c8831036beb147d3aa86c7c0::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitae3f9822c8831036beb147d3aa86c7c0::$classMap;
 
         }, null, ClassLoader::class);
     }

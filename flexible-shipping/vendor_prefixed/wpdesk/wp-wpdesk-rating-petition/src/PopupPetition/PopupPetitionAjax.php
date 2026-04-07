@@ -39,6 +39,9 @@ class PopupPetitionAjax implements Hookable
             case 'submit_feedback':
                 $this->handle_submit_feedback();
                 break;
+            case 'postpone':
+                $this->handle_postpone();
+                break;
             default:
                 wp_send_json_error(['message' => __('Unknown action.', 'flexible-shipping')], 400);
         }
@@ -81,6 +84,19 @@ class PopupPetitionAjax implements Hookable
         } else {
             wp_send_json_error(['message' => __('Could not send email. Please try again later.', 'flexible-shipping')], 500);
         }
+    }
+    /**
+     * Postpone displaying the popup.
+     */
+    private function handle_postpone(): void
+    {
+        /**
+         * Action fired after postponing rating petition popup.
+         *
+         * @param string $plugin_slug Plugin slug passed to the popup system.
+         */
+        do_action('wpdesk_rating_petition_postpone', $this->plugin_slug);
+        wp_send_json_success(['message' => __('Postponed.', 'flexible-shipping')]);
     }
     private function build_rating_url(int $rating): string
     {
