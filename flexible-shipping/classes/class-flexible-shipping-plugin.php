@@ -10,6 +10,7 @@ use FSVendor\Octolize\Blocks\Registrator;
 use FSVendor\Octolize\Blocks\StoreEndpoint;
 use FSVendor\Octolize\Brand\Assets\AdminAssets;
 use FSVendor\Octolize\Brand\UpsellingBox\ShippingMethodShouldShowStrategy;
+use FSVendor\Octolize\Docs\Chat\DocsChat;
 use FSVendor\Octolize\ShippingExtensions\ShippingExtensions;
 use FSVendor\Octolize\Tracker\DeactivationTracker\OctolizeReasonsFactory;
 use FSVendor\Octolize\Tracker\OptInNotice\ShouldDisplayAndConditions;
@@ -38,6 +39,7 @@ use FSVendor\WPDesk\RepositoryRating\RepositoryRatingPetitionText;
 use FSVendor\WPDesk\RepositoryRating\TextPetitionDisplayer;
 use FSVendor\WPDesk\Session\SessionFactory;
 use FSVendor\WPDesk\ShowDecision\WooCommerce\ShippingMethodInstanceStrategy;
+use FSVendor\WPDesk\ShowDecision\WooCommerce\ShippingMethodStrategy;
 use FSVendor\WPDesk\View\Resolver\ChainResolver;
 use FSVendor\WPDesk\View\Resolver\DirResolver;
 use FSVendor\WPDesk\View\Resolver\WPThemeResolver;
@@ -48,6 +50,7 @@ use WPDesk\FS\Blocks\FreeShipping\FreeShippingStoreEndpointData;
 use WPDesk\FS\Admin\MarketplaceSuggestionsRedirect;
 use WPDesk\FS\Helpers\FlexibleShippingMethodsChecker;
 use WPDesk\FS\Helpers\WooSettingsPageChecker;
+use WPDesk\FS\HookProvider\Admin\DocsChatSettingsProvider;
 use WPDesk\FS\Integration\ExternalPluginAccess;
 use WPDesk\FS\Newsletter\SubscriptionForm;
 use WPDesk\FS\Onboarding\TableRate\FinishOption;
@@ -68,6 +71,7 @@ use WPDesk\FS\TableRate\FreeShipping\FreeShippingNoticeGenerator;
 use WPDesk\FS\TableRate\FreeShipping\FreeShippingNoticeRenderer;
 use WPDesk\FS\TableRate\FreeShipping\NoticeTextSettings;
 use WPDesk\FS\TableRate\FreeShipping\ProgressBarSettings;
+use WPDesk\FS\TableRate\FreeShipping\Tracker\ThresholdAlertTracker;
 use WPDesk\FS\TableRate\ImporterExporter\Exporter;
 use WPDesk\FS\TableRate\ImporterExporter\ExporterData;
 use WPDesk\FS\TableRate\ImporterExporter\ImporterData;
@@ -89,6 +93,7 @@ use WPDesk\FS\TableRate\ShippingMethod\Management\ShippingMethodManagement;
 use WPDesk\FS\TableRate\ShippingMethod\MethodDescription;
 use WPDesk\FS\TableRate\ShippingMethod\MethodLogoCheckoutBlocksAssets;
 use WPDesk\FS\TableRate\ShippingMethod\MethodLogoSettingsField;
+use WPDesk\FS\TableRate\ShippingMethod\Tracker\MethodLogoTracker;
 use WPDesk\FS\TableRate\ShippingMethod\MethodTitle;
 use WPDesk\FS\TableRate\ShippingMethodSingle;
 use WPDesk\FS\TableRate\ShippingMethodsIntegration\ShippingRate;
@@ -119,7 +124,7 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 	 *
 	 * @var string
 	 */
-	private $scripts_version = '2';
+	private $scripts_version = '4';
 
 	/**
 	 * Admin notices.
@@ -274,6 +279,7 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 		$this->add_hookable( new MethodDescription( $this->renderer ) );
 		$this->add_hookable( new MethodLogoCheckoutBlocksAssets( $this->get_plugin_url(), $this->scripts_version ) );
 		$this->add_hookable( new MethodLogoSettingsField() );
+		$this->add_hookable( new MethodLogoTracker() );
 
 		$this->add_hookable( new Exporter() );
 		$this->add_hookable( new ImporterData() );
@@ -353,6 +359,8 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 
 		// Redirect woo marketplace suggestions
 		$this->add_hookable( new MarketplaceSuggestionsRedirect( $this->prepare_marketplace_suggestions_should_show_strategy() ) );
+
+		$this->initialize_docs_chat();
 
 		// Rating petition
 		add_action( 'admin_init', [ $this, 'init_rating_petition' ] );
@@ -588,6 +596,7 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 		( new NoticeTextSettings() )->hooks();
 		( new ProgressBarSettings() )->hooks();
 		( new \WPDesk\FS\TableRate\FreeShipping\Tracker() )->hooks();
+		( new ThresholdAlertTracker() )->hooks();
 	}
 
 	/**
@@ -658,6 +667,39 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 			$show_strategy->addCondition( new ShippingMethodInstanceStrategy( $shipping_zones, WPDesk_Flexible_Shipping::METHOD_ID ) );
 			$show_strategy->addCondition( new ShippingMethodInstanceStrategy( $shipping_zones, ShippingMethodSingle::SHIPPING_METHOD_ID ) );
 		}
+
+		return $show_strategy;
+	}
+
+	private function initialize_docs_chat(): void {
+		$plugin_slug = 'flexible-shipping';
+		$plugin_name = 'Flexible Shipping';
+		if ( defined( 'FLEXIBLE_SHIPPING_PRO_VERSION' ) ) {
+			$plugin_slug = 'flexible-shipping-pro';
+			$plugin_name = 'Flexible Shipping PRO';
+		}
+
+		$this->add_hookable(
+			new DocsChat(
+				$plugin_slug,
+				$this->get_plugin_url(),
+				$this->plugin_info->get_version(),
+				$this->prepare_docs_chat_should_show_strategy(),
+				new DocsChatSettingsProvider( $plugin_name )
+			)
+		);
+	}
+
+	private function prepare_docs_chat_should_show_strategy(): OrStrategy {
+		$show_strategy = new OrStrategy(
+			new ShippingMethodStrategy( \WPDesk_Flexible_Shipping_Settings::METHOD_ID )
+		);
+		$show_strategy->addCondition(
+			new ShippingMethodInstanceStrategy(
+				new \WC_Shipping_Zones(),
+				ShippingMethodSingle::SHIPPING_METHOD_ID
+			)
+		);
 
 		return $show_strategy;
 	}
