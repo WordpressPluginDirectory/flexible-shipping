@@ -34,7 +34,8 @@ use FSVendor\WPDesk\PluginBuilder\Plugin\HookableCollection;
 use FSVendor\WPDesk\PluginBuilder\Plugin\HookableParent;
 use FSVendor\WPDesk\PluginBuilder\Plugin\TemplateLoad;
 use FSVendor\WPDesk\RepositoryRating\DisplayStrategy\ShippingMethodDisplayDecision;
-use FSVendor\WPDesk\RepositoryRating\PopupPetition\PopupPetition;
+use WPDesk\FS\RatingPetition\Ajax as RatingPetitionAjax;
+use WPDesk\FS\RatingPetition\Popup as RatingPetitionPopup;
 use FSVendor\WPDesk\RepositoryRating\RepositoryRatingPetitionText;
 use FSVendor\WPDesk\RepositoryRating\TextPetitionDisplayer;
 use FSVendor\WPDesk\Session\SessionFactory;
@@ -51,8 +52,10 @@ use WPDesk\FS\Admin\MarketplaceSuggestionsRedirect;
 use WPDesk\FS\Helpers\FlexibleShippingMethodsChecker;
 use WPDesk\FS\Helpers\WooSettingsPageChecker;
 use WPDesk\FS\HookProvider\Admin\DocsChatSettingsProvider;
+use WPDesk\FS\Info\DashboardTracker;
+use WPDesk\FS\Info\DashboardTrackingData;
+use WPDesk\FS\Info\DashboardTrackingReceiver;
 use WPDesk\FS\Integration\ExternalPluginAccess;
-use WPDesk\FS\Newsletter\SubscriptionForm;
 use WPDesk\FS\Onboarding\TableRate\FinishOption;
 use WPDesk\FS\Onboarding\TableRate\Onboarding;
 use WPDesk\FS\Onboarding\TableRate\OptionAjaxUpdater;
@@ -124,7 +127,7 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 	 *
 	 * @var string
 	 */
-	private $scripts_version = '4';
+	private $scripts_version = '34';
 
 	/**
 	 * Admin notices.
@@ -316,6 +319,10 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 		$this->add_hookable( new ProFeatures\Tracker\AjaxTracker( $tracking_data ) );
 		$this->add_hookable( new ProFeatures\Tracker\Tracker( $tracking_data ) );
 
+		$dashboard_tracking_data = new DashboardTrackingData();
+		$this->add_hookable( new DashboardTrackingReceiver( $dashboard_tracking_data ) );
+		$this->add_hookable( new DashboardTracker( $dashboard_tracking_data ) );
+
 		// Time tracking
 		$this->add_hookable( new \WPDesk\FS\TableRate\ShippingMethod\Timestamps\MethodTimestamps() );
 		$this->add_hookable( new \WPDesk\FS\TableRate\ShippingMethod\Timestamps\TrackerData() );
@@ -354,13 +361,13 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 			)
 		);
 
-		// Newsletter
-		$this->add_hookable( new SubscriptionForm() );
-
 		// Redirect woo marketplace suggestions
 		$this->add_hookable( new MarketplaceSuggestionsRedirect( $this->prepare_marketplace_suggestions_should_show_strategy() ) );
 
 		$this->initialize_docs_chat();
+
+		$this->add_hookable( new \WPDesk\FS\RatingPetition\Tracker() );
+		$this->add_hookable( new \WPDesk\FS\RatingPetition\SaveCounter() );
 
 		// Rating petition
 		add_action( 'admin_init', [ $this, 'init_rating_petition' ] );
@@ -380,32 +387,12 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 				)
 			) )->hooks();
 
-			$option_name      = 'flexible-shipping-method-update-count';
-			$max_update_count = 5;
-			$option_value     = (int) get_option( $option_name, 0 );
-			if ( $option_value >= $max_update_count ) {
-				$current_user = wp_get_current_user();
-				( new PopupPetition(
-					'flexible-shipping',
-					__( 'Flexible Shipping', 'flexible-shipping' ),
-					'help@octolize.com',
-					$current_user ? $current_user->user_email : '',
-					'admin_footer',
-					$shipping_method_display_decision
-				) )->init()->hooks();
-			}
-
-			add_action( 'flexible_shipping_method_updated', function ( $instance_id ) use ( $option_name, $max_update_count, $option_value ) {
-				if ( $option_value < $max_update_count ) {
-					update_option( $option_name, (int) get_option( $option_name, 0 ) + 1 );
-				}
-			} );
-
-			add_action( 'wpdesk_rating_petition_postpone', function ( $plugin_slug ) use ( $option_name, $max_update_count ) {
-				if ( $plugin_slug === 'flexible-shipping' ) {
-					update_option( $option_name, (int) floor( $max_update_count / 2 ) );
-				}
-			} );
+			( new RatingPetitionPopup(
+				$shipping_method_display_decision,
+				$this->plugin_info->get_plugin_url(),
+				$this->plugin_info->get_version()
+			) )->hooks();
+			( new RatingPetitionAjax() )->hooks();
 		}
 	}
 
@@ -896,6 +883,26 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 			);
 			wp_enqueue_script( 'fs_admin' );
 
+			if ( isset( $_GET['section'] ) && WPDesk_Flexible_Shipping_Settings::METHOD_ID === sanitize_key( wp_unslash( $_GET['section'] ) ) ) {
+				add_filter( 'admin_body_class', [ $this, 'add_dashboard_admin_body_class' ] );
+				wp_enqueue_script(
+					'fs_dashboard',
+					trailingslashit( $this->get_plugin_assets_url() ) . 'js/dashboard.js',
+					[ 'heartbeat' ],
+					$this->scripts_version,
+					true
+				);
+				wp_localize_script(
+					'fs_dashboard',
+					'fsDashboardTracking',
+					[
+						'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+						'action'  => DashboardTrackingReceiver::AJAX_ACTION,
+						'nonce'   => wp_create_nonce( DashboardTrackingReceiver::AJAX_ACTION ),
+					]
+				);
+			}
+
 			$current_screen = get_current_screen();
 
 			wp_register_script(
@@ -928,6 +935,17 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 			do_action( 'flexible-shipping/admin/enqueue_scripts', $this, $suffix );
 
 		}
+	}
+
+	/**
+	 * Add body class on the Flexible Shipping info page.
+	 *
+	 * @param string $classes Admin body classes.
+	 *
+	 * @return string
+	 */
+	public function add_dashboard_admin_body_class( $classes ) {
+		return $classes . ' flexible-shipping-info-page';
 	}
 
 	/**
@@ -979,8 +997,8 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 
 		if ( ! defined( 'FLEXIBLE_SHIPPING_PRO_VERSION' )  ) {
 			$pro_link     = get_locale() === 'pl_PL' ? 'https://octol.io/fs-upgrade-pl' : 'https://octol.io/fs-upgrade';
-			$plugin_links[] = '<a href="' . esc_url( $pro_link ) . '" target="_blank" style="color:#00B62E;font-weight:bold;">' . __(
-					'Buy PRO',
+			$plugin_links[] = '<a href="' . esc_url( $pro_link ) . '" target="_blank" style="color:#00e3c0;font-weight:bold;">' . __(
+					'Buy Flexible Shipping PRO',
 					'flexible-shipping'
 				) . '</a>';
 		}

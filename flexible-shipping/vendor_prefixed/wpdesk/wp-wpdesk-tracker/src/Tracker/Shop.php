@@ -76,7 +76,7 @@ class Shop
         $logo_file .= '.png';
         $logo_file = apply_filters_ref_array('wpdesk/tracker/logo_file', [$logo_file, $this->shop]);
         // Look for our assets folder from package root directory.
-        if (!file_exists(dirname(__DIR__, 3) . '/assets/images/' . $logo_file)) {
+        if (!file_exists(dirname(__DIR__) . '/assets/images/' . $logo_file)) {
             $logo_file = $this->default_logo;
         }
         return $logo_file;

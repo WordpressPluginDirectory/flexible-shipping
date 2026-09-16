@@ -6,6 +6,16 @@ const outputDir = path.resolve( rootDir, 'assets' );
 
 const scriptEntries = [
 	{
+		input: 'assets-src/js/rating-petition.js',
+		name: 'FlexibleShippingRatingPetition',
+		output: 'js/rating-petition.js',
+	},
+	{
+		input: 'assets-src/admin/js/dashboard.js',
+		name: 'FlexibleShippingDashboard',
+		output: 'js/dashboard.js',
+	},
+	{
 		input: 'assets-src/rules-settings/js/index.jsx',
 		name: 'FlexibleShippingRulesSettings',
 		output: 'js/rules-settings.js',
@@ -23,6 +33,10 @@ const scriptEntries = [
 ];
 
 const styleEntries = [
+	{
+		input: 'assets-src/scss/rating-petition.scss',
+		output: 'css/rating-petition.css',
+	},
 	{
 		input: 'assets-src/rules-settings/scss/style.scss',
 		output: 'css/rules-settings.css',

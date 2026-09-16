@@ -23,16 +23,16 @@ class WPDesk_Flexible_Shipping_Logger_Settings {
 	/**
 	 * SaaS settings.
 	 *
-	 * @var WPDesk_Flexible_Shipping_Settings
+	 * @var WPDesk_Flexible_Shipping_Settings|null
 	 */
 	private $saas_settings;
 
 	/**
 	 * WPDesk_Flexible_Shipping_SaaS_Logger_Settings constructor.
 	 *
-	 * @param WPDesk_Flexible_Shipping_Settings $saas_settings SaaS settings.
+	 * @param WPDesk_Flexible_Shipping_Settings|null $saas_settings SaaS settings.
 	 */
-	public function __construct( WPDesk_Flexible_Shipping_Settings $saas_settings = null ) {
+	public function __construct( ?WPDesk_Flexible_Shipping_Settings $saas_settings = null ) {
 		$option_value  = get_option( self::OPTION_NAME, self::OPTION_VALUE_DISABLED );
 		$this->enabled = self::OPTION_VALUE_ENABLED === $option_value;
 
@@ -79,13 +79,14 @@ class WPDesk_Flexible_Shipping_Logger_Settings {
 	 * @return array
 	 */
 	public function add_fields_to_settings( array $settings ) {
-		$settings[ self::DEBUG_LOG_OPTION ] = array(
-			'type'  => 'checkbox',
-			'label' => __( 'Enable Debug Mode', 'flexible-shipping' ),
-			'title' => __( 'Debug mode', 'flexible-shipping' ),
-		);
+		$settings[ self::DEBUG_LOG_OPTION ] = [
+			'type'        => 'checkbox',
+			'label'       => __( 'Enable Debug Mode', 'flexible-shipping' ),
+			'title'       => __( 'Debug mode', 'flexible-shipping' ),
+			'description' => __( "See why a shipping method is or isn't showing in the cart.", 'flexible-shipping' ),
+		];
 		if ( 'yes' === $this->saas_settings->get_option( self::DEBUG_LOG_OPTION ) ) {
-			$settings[ self::DEBUG_LOG_OPTION ]['description'] = sprintf(
+			$settings[ self::DEBUG_LOG_OPTION ]['description'] .= ' ' . sprintf(
 				// Translators: URL.
 				__( '%1$sDownload debug.log file%2$s', 'flexible-shipping' ),
 				sprintf( '<a href="%1$s" target="_blank">', admin_url( 'admin.php?page=wc-status&tab=logs&source=flexible-shipping&paged=1' ) ),
